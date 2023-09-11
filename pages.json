@@ -1,0 +1,449 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/guide",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/home",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+		}, {
+			"path": "pages/my/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/navIcon",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/cms/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/user/register",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/protocal",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/user/codeLogin",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/user/forgetPwd",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/cms/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/cms/reply",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/profile",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/user/findPwd",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/setting",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/resetPwd",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/changeTel",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		},
+		 {
+			"path": "pages/message/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/ask/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/registration/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/hospital/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/hospital/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/doctor/search",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/doctor/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/doctor/result",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/hospital/office",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/apply",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/patient/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/patient/add",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/patient/city",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/doctor/find",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/doctor/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/medicine",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/item",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/ask/add",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/registration/add",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/registration/payResult",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/ask/confirm",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, 
+		{
+			"path" : "pages/ask/detail",
+			"style" :                                                                                    
+			{
+			   "navigationStyle": "custom",
+			   "navigationBarTextStyle": "black"
+			}
+		}
+		,{
+			"path" : "pages/ask/pay",
+			"style" :                                                                                    
+			{
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		
+		{
+			"path": "pages/ask/payResult",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/registration/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/ask",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/registration",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/registration/pay",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/registration/rule",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}
+
+		, {
+			"path": "pages/prescribe/pay",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/finish",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/prescribe",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/my/diagnosis",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}, {
+			"path": "pages/prescribe/diagnosis",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+
+		}
+	    ,{
+            "path" : "pages/message/detail",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom",
+                "navigationBarTextStyle": "black"
+            }
+            
+        }
+		,{
+		    "path" : "pages/doctor/comment",
+		    "style" :                                                                                    
+		    {
+		        "navigationStyle": "custom",
+		        "navigationBarTextStyle": "black"
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/setIp",
+            "style" :                                                                                    
+            {
+                "app-plus": {
+                	"titleNView": false
+                }
+				
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		// #ifdef H5
+		"navigationStyle": "custom",
+		// #endif
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+
+	},
+	"tabBar": {
+		
+		"list": [{
+				"pagePath": "pages/home"
+			},
+			{
+				"pagePath": "pages/cms/index"
+			},
+			{
+				"pagePath": "pages/message/index"
+			},
+			{
+				"pagePath": "pages/my/index"
+			}
+		]
+	}
+}
