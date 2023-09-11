@@ -18,7 +18,7 @@
 					<u-avatar :src="getBaseUrl()+profile.avatar" size="140"></u-avatar>
 				</view>
 				<view class="u-flex-9">
-					<view class="name">{{profile.nickName}}</view>
+					<view class="name">{{profile.realName}}</view>
 					<view class="sex">{{profile.sex=='0'?'男':profile.sex=='1'?'女':'保密'}} <text
 							v-if="profile.age">{{profile.age}}岁</text></view>
 				</view>
@@ -74,6 +74,9 @@
 			}
 		},
 		onLoad() {
+			this.getProfile();
+		},
+		onShow() {
 			this.getProfile();
 		},
 		methods: {
