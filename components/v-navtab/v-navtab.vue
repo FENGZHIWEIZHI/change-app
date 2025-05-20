@@ -87,7 +87,7 @@ export default {
 	position: fixed;
 	top: 0;
 	width: 750rpx;
-	border-bottom: 1rpx solid #eee;
+	border-bottom: 1rpx solid #f60;
 	z-index: 999;
 }
 </style>

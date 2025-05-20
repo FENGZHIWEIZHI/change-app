@@ -1,9 +1,9 @@
 <template>
-	<view>
-		<u-navbar :is-back="false" :title="title">
+	<view class="u-p-20 content">
+		<u-navbar :is-back="false" :title="title" :borderBottom="false">
 			<view class="slot-wrap">
 				<view class="u-flex">
-					<image src="../../static/image/cmt.jpg"></image>
+					<!-- <image src="../../static/image/cmt.jpg"></image> -->
 					<text class="u-font-30 u-m-l-20">我的</text>
 				</view>
 
@@ -12,45 +12,82 @@
 				</view>
 			</view>
 		</u-navbar>
-		<view class="my-info u-margin-20 u-padding-20" @click="handleProfile">
+		<view class="my-info u-padding-20" @click="handleProfile">
 			<view class="u-flex u-col-center">
 				<view class="u-flex-3">
-					<u-avatar :src="getBaseUrl()+profile.avatar" size="140"></u-avatar>
+					<u-avatar :src="profile.avatar" size="140"></u-avatar>
 				</view>
 				<view class="u-flex-9">
-					<view class="name">{{profile.realName}}</view>
-					<view class="sex">{{profile.sex=='0'?'男':profile.sex=='1'?'女':'保密'}} <text
-							v-if="profile.age">{{profile.age}}岁</text></view>
+					<view class="name">{{nickName}}</view>
+					<view class="sex">
+						账号：
+						<text>
+							{{userName}}
+						</text>
+					</view>
 				</view>
 			</view>
 		</view>
+		<view class="my-up">
+			<view class="">
+				<view class="">
+					<view class="my-size">
+						可用余额
+					</view>
+					<view class="my-title">
+						{{money}}
+					</view>
+				</view>
+				<view class="">
+					<image class="image" src="/static/image/my-balance.png" mode=""></image>
+				</view>
+			</view>
+			<!-- <view class="" @click="handleAsk">
+				<view class="">
+					<view class="my-size">
+						我的电站
+					</view>
+					<view class="my-text">
+						<text class="my-title">{{'2'}}</text>个
+					</view>
+				</view>
+				<view class="">
+					<image class="image" src="../../static/image/my-power.png" mode=""></image>
+				</view>
+			</view> -->
+		</view>
 		<view class="u-margin-top-20 menu">
 			<u-cell-group>
-				<u-cell-item title="挂号记录" :arrow="true" @click="handleReg">
+				<u-cell-item title="我的订单" :arrow="true" @click="handleReg">
 					<view slot="icon" class="u-flex">
-						<image mode="widthFix" src="/static/image/icon/register.png" class="icon"></image>
+						<image mode="widthFix" src="/static/icons/my/dingdan.png" class="icon"></image>
 					</view>
 				</u-cell-item>
-				<u-cell-item title="问诊记录" :arrow="true" @click="handleAsk">
+				<u-cell-item title="我的爱车" :arrow="true" @click="handleAsk">
 					<view slot="icon" class="u-flex">
-						<image mode="widthFix" src="/static/image/icon/Consultation.png" class="icon"></image>
+						<image mode="widthFix" src="/static/icons/my/car.png" class="icon"></image>
 					</view>
 				</u-cell-item>
-				<u-cell-item title="开药记录" :arrow="true" @click="handlePrescribe">
+				<u-cell-item title="充电记录" :arrow="true" @click="handlePrescribe">
 					<view slot="icon" class="u-flex">
-						<image mode="widthFix" src="/static/image/icon/Prescribe_medicine.png" class="icon"></image>
+						<image mode="widthFix" src="/static/icons/my/lishijilu.png" class="icon"></image>
 					</view>
 				</u-cell-item>
-				<u-cell-item title="我的处方" :arrow="true" @click="handlediagnosis">
+				<u-cell-item title="客服中心" :arrow="true" @click="handlediagnosis">
 					<view slot="icon" class="u-flex">
-						<image mode="widthFix" src="/static/image/icon/prescription.png" class="icon"></image>
+						<image mode="widthFix" src="/static/icons/my/kefu.png" class="icon"></image>
 					</view>
 				</u-cell-item>
-				<u-cell-item :title="Visits" :arrow="true" @click="handlePatient">
+				<u-cell-item title="设置" :arrow="true" @click="handlediagnosis">
+					<view slot="icon" class="u-flex">
+						<image mode="widthFix" src="/static/icons/my/set.png" class="icon"></image>
+					</view>
+				</u-cell-item>
+				<!-- <u-cell-item :title="Visits" :arrow="true" @click="handlePatient">
 					<view slot="icon" class="u-flex">
 						<image mode="widthFix" src="/static/image/icon/Patient_management.png" class="icon"></image>
 					</view>
-				</u-cell-item>
+				</u-cell-item> -->
 			</u-cell-group>
 		</view>
 		<cmt-footer></cmt-footer>
@@ -67,36 +104,49 @@
 			return {
 				title: "",
 				profile: {},
-				Visits:'就诊人管理',
+				Visits:'',
 				num:{
 					box:1
-				}
+				},
+				money:'',
+				userName:'',
+				nickName:''
 			}
 		},
 		onLoad() {
-			this.getProfile();
+			// this.getProfile();
 		},
 		onShow() {
-			this.getProfile();
+			// this.getProfile();
+			this.getBalance()
 		},
 		methods: {
+			getBalance(){
+				this.userId = uni.getStorageSync('userId')
+				this.userName = uni.getStorageSync('user').userName
+				this.nickName = uni.getStorageSync('user').nickName
+				this.$u.api.getbalance(this.userId).then((res)=>{
+					console.log(res);
+					this.money = res.data.money
+				})
+			},
 			handlePatient(){
 				this.$u.route('/pages/patient/index',this.num)
 			},
 			handleProfile() {
-				this.$u.route('/pages/my/profile')
+				// this.$u.route('/pages/my/profile')
 			},
 			handleReg() {
-				this.$u.route('/pages/my/registration')
+				// this.$u.route('/pages/my/registration')
 			},
 			handleAsk() {
-				this.$u.route('/pages/my/ask')
+				// this.$u.route('/pages/my/ask')
 			},
 			handlePrescribe() {
-				this.$u.route('/pages/my/prescribe')
+				// this.$u.route('/pages/my/prescribe')
 			},
 			handlediagnosis() {
-				this.$u.route('/pages/my/diagnosis')
+				// this.$u.route('/pages/my/diagnosis')
 			},
 			getProfile() {
 				this.$u.api.getUserInfo().then(res => {
@@ -111,13 +161,17 @@
 	}
 </script>
 
-<style>
-	page {
-		background-color: #FFFFFF;
-	}
-</style>
+
 
 <style scoped lang="scss">
+	.content{
+		// background-color: red;
+		background:linear-gradient( #93FFDA , #F2F9F6);
+		height: 100vh;
+	}
+	/deep/.u-navbar-inner{
+		background-color: #93FFDA;
+	}
 	.slot-wrap {
 		display: flex;
 		justify-content: space-between;
@@ -139,19 +193,18 @@
 	}
 
 	.my-info {
-		background-color: $u-type-primary;
 		border: 1px;
 		border-radius: 15rpx;
-
+		// background:linear-gradient(160deg, #93FFDA , #F2F9F6);
 		.name {
-			color: #FFFFFF;
+			color: #333;
 			font-weight: bold;
-			font-size: 15px;
+			font-size: 30rpx;
 		}
 
 		.sex {
-			color: #FFFFFF;
-			font-size: 14px;
+			color: #333;
+			font-size: 28rpx;
 		}
 	}
 
@@ -159,7 +212,36 @@
 		background-color: #FFFFFF;
 
 		.icon {
-			width: 24px;
+			width: 40rpx;
+			margin-right: 10rpx;
+		}
+	}
+	.my-up{
+		
+		display: flex;
+		justify-content: space-around;
+		>view:nth-child(1){display: flex;background-color: #fff;padding: 20rpx;justify-content: space-between;flex: 1;border-radius: 20rpx;}
+		>view:nth-child(2){display: flex;background-color: #fff;padding: 20rpx;justify-content: space-between;flex: 1;margin-left: 20rpx;border-radius: 20rpx;}
+		.my-size{
+			font-size: 24rpx;
+			color: #666;
+		}
+		.my-title{
+			font-size: 40rpx;
+			color: #333;
+			line-height: 80rpx;
+			font-weight: bold;
+			width: 180rpx;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.my-text{
+			font-size: 28rpx;
+		}
+		.image{
+			width: 100rpx;
+			height: 100rpx;
 		}
 	}
 </style>

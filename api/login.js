@@ -1,6 +1,6 @@
 // 获取验证码
-function getCode(username) {
-  return uni.$u.get('/code',{ username });
+function getCode(phonenumber) {
+  return uni.$u.get('/api/code',{ phonenumber });
 }
 
 // 登录方法

@@ -1,10 +1,10 @@
 <template>
 	<view class="u-padding-20">
 		<view class="logo u-flex u-row-center">
-			<image src="/static/image/cmt.jpg"></image>
+			<image src="/static/logo.jpg"></image>
 		</view>
 		<view class="type">账号密码登录</view>
-		<view class="tips">欢迎使用云上门诊App</view>
+		<view class="tips">欢迎使用智能充电商用版</view>
 		<view class="form">
 			<u-form :model="form" :rules="rules" ref="uform" :errorType="errorType" label-position="top">
 				<u-form-item label="手机号码" prop="username" :border-bottom="false">
@@ -20,19 +20,20 @@
 				<u-checkbox v-model="check" @change="checkboxChange"></u-checkbox>
 				<text class="tips">我已阅读并同意<text class="link" @click="toProtocal()">《用户隐私政策》</text></text>
 			</view>
-			<view @click="toForgetPwd()">忘记密码？</view>
+			<!-- <view @click="toForgetPwd()">忘记密码？</view> -->
 		</view>
 		<view class="u-margin-top-50">
-			<u-button :disabled="disabled" type="primary" @click="login">登录</u-button>
+			<u-button :disabled="disabled" type="primary" @click.stop="login">登录</u-button>
 		</view>
 		<view class="u-flex u-row-between link u-margin-top-40">
-			<text @click="toCodeLogin()">免密登录</text>
-			<text @click="toRegister()">注册新用户</text>
+			<text @click="toCodeLogin()"></text>
+			<!-- <text @click="toRegister()">注册新用户</text> -->
 		</view>
 	</view>
 </template>
 
 <script>
+	import ws from '@/websocket/ws.js';
 	export default {
 		data() {
 			return {
@@ -73,6 +74,9 @@
 		onReady() {
 			this.$refs.uform.setRules(this.rules);
 		},
+		onLoad() {
+			ws.disconnect()
+		},
 		methods: {
 			login() {
 				this.$refs.uform.validate(valid => {
@@ -81,11 +85,23 @@
 							this.$u.vuex('token', res.token);
 							this.$u.vuex('isLogin', true);
 							this.$u.api.getUserInfo().then(res => {
-								this.$u.vuex('userInfo', res.userInfo);
-								this.$u.route({
-									url: '/pages/home',
-									type: 'tab'
-								});
+								// console.log(res.userInfo);
+								if(res.code == 200){
+									console.log(res);
+									let cars = []
+									res.cars.forEach((i)=>{
+										cars.push(i.carId)
+									})
+									uni.setStorageSync('cars',res.cars[0]?cars.join(','):'-1')
+									uni.setStorageSync('roles',res.roles)
+									uni.setStorageSync('userId',res.user.userId)
+									uni.setStorageSync('user',res.user)
+									this.$u.route({
+										url: '/pages/home',
+										type: 'tab'
+									});
+								}
+								
 							})
 						});
 					}

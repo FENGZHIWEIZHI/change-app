@@ -12,12 +12,11 @@ import {
 	invalidCode,
 } from '@/common/settings'
 
-
 // 这里的vm，就是我们在vue文件里面的this，所以我们能在这里获取vuex的变量，比如存放在里面的token变量
 const install = (Vue, vm) => {
 	// 此为自定义配置参数，具体参数见上方说明
 	Vue.prototype.$u.http.setConfig({
-		// baseUrl: process.env.NODE_ENV === 'development' ? devUrl : prodUrl, // 请求的本域名
+		baseUrl: process.env.NODE_ENV === 'development' ? devUrl : prodUrl, // 请求的本域名
 		method: 'GET',
 		// 设置为json，返回后会对数据进行一次JSON.parse()
 		dataType: 'json',
@@ -40,14 +39,15 @@ const install = (Vue, vm) => {
 		// 可以对某个url进行特别处理，此url参数为this.$u.get(url)中的url值
 		// if(config.url == '/user/login') config.header.noToken = true;
 		// 在白名单里，不需要token
+		console.log(vm.token);
 		if (whiteList.indexOf(config.url) !== -1) {
 			config.header.noToken = true;
 		} else {
-			config.header[headerTokenName] = vm.token;
+			config.header[headerTokenName] = 'Bearer '+vm.token;
 		}
-		if (config.url !== '/logout') {
-			config.url = '/api' + config.url;
-		}
+		// if (config.url !== '/logout') {
+		// 	config.url = '/api' + config.url;
+		// }
 		
 		config.url = uni.getStorageSync('serverIp') + config.url;
 		// 最后需要将config进行return
@@ -79,8 +79,9 @@ const install = (Vue, vm) => {
 		} else {
 			// 如果返回false，则会调用Promise的reject回调，
 			// 并将进入this.$u.post(url).then().catch(res=>{})的catch回调中，res为服务端的返回值
+			
 			vm.$u.toast(res.msg)
-			return false;
+			return res
 		}
 	}
 }

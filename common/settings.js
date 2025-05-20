@@ -8,10 +8,19 @@ module.exports = {
 	// 版本号
 	version: '1.0.0',
 	// 开发环境接口Url
-	devUrl: 'http://localhost:9090',
-	//devUrl: 'http://sh.luojixiangliang.com:9988',
+	devUrl: 'http://124.93.196.45:10001/dev-api',
+	// devUrl: 'http://59.46.190.166:7080/dev-api',
+	// devUrl: 'http://192.168.1.100:80/dev-api',
+	// devUrl: 'http://192.168.1.100:81/dev-api',
+	// devUrl: 'http://192.168.254.201:81/dev-api',
+	// devUrl: 'http://10.199.1.33:81/dev-api',
 	// 线上环境接口Url
-	prodUrl: 'http://section.cloudsheng.com:8834',
+	prodUrl: 'http://124.93.196.45:10001/dev-api',
+	// prodUrl: 'http://59.46.190.166:7080/dev-api',
+	// prodUrl: 'http://192.168.1.100:80/dev-api',
+	// prodUrl: 'http://192.168.1.100:81/dev-api',
+	// prodUrl: 'http://192.168.254.201:81/dev-api',
+	// prodUrl: 'http://10.199.1.33:81/dev-api',
 	// 配后端数据的接收方式application/json;charset=UTF-8或者application/x-www-form-urlencoded;charset=UTF-8
 	contentType: 'application/json;charset=UTF-8',
 	// 后端返回状态码，如code,status

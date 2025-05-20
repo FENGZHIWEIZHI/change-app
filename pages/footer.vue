@@ -12,30 +12,34 @@
 				current: "",
 				tabList: [{
 					pagePath: "/pages/home",
-					iconPath: "home",
-					selectedIconPath: "home-fill",
+					iconPath: require("../static/image/shouye1.png"),
+					selectedIconPath: require("../static/image/shouye.png"),
 					text: '首页',
 					customIcon: false,
-				}, {
-					pagePath: "/pages/cms/index",
-					iconPath: "chat",
-					selectedIconPath: "chat-fill",
-					text: '病理科普',
-					customIcon: false,
-				}, {
+				}, 
+				
+				{
 					pagePath: "/pages/message/index",
-					iconPath: "kefu-ermai",
-					selectedIconPath: "server-fill",
-					text: '消息',
+					iconPath: require("../static/image/dingdan.png"),
+					selectedIconPath: require("../static/image/dingdan1.png"),
+					text: '订单',
 					customIcon: false,
-				}, {
+				},
+				{
+					pagePath: "/pages/cms/index",
+					iconPath: require("../static/image/shujufenxi.png"),
+					selectedIconPath: require("../static/image/shujufenxi1.png"),
+					text: '数据分析',
+					customIcon: false,
+				}, 
+				{
 					pagePath: "/pages/my/index",
-					iconPath: "account",
-					selectedIconPath: "account-fill",
+					iconPath: require("../static/image/wode.png"),
+					selectedIconPath: require("../static/image/wode1.png"),
 					text: '我的',
 					customIcon: false,
 				}],
-				activeColor: '#1e5cdf'
+				activeColor: '#15c38e'
 			}
 		},
 		methods:{

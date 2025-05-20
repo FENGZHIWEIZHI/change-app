@@ -1,11 +1,10 @@
 <template>
-	<view>
-		<u-navbar :is-back="false" :title="title">
+	<view class="content">
+		<u-navbar :is-back="false" :title="title" :background="background" :borderBottom="false">
 			<view class="slot-wrap">
 				<view class="u-flex u-row-center u-p-10 searchBox">
-					<view class="u-p-l-10" @click="handleCity"> {{cityName}}<u-icon name="map-fill"></u-icon></view>
 					<view class="u-flex-11">
-						<u-search v-model="keyword" placeholder="请输入医生名" height="56" :show-action="false" @search="handleSearch"></u-search>
+						<u-search v-model="keyword" placeholder="搜索充电站" height="56" :show-action="false" @search="handleSearch"></u-search>
 					</view>
 				</view>
 			</view>
@@ -15,115 +14,127 @@
 				</view>
 			</view>
 		</u-navbar>
-		<u-swiper :list="advList"></u-swiper>
-		<view class="u-margin-top-20">
-			<cmt-nav-icon></cmt-nav-icon>
-		</view>
-		<u-card v-if="remindList.length > 0">
-			<view slot="head">
-				<u-section title="预约提醒" :right="false"></u-section>
-			</view>
-			<view slot="body">
-				<scroll-view class="scroll-contain" scroll-x="true">
-					<block v-for="item in remindList" :key="item.id">
-						<view class="scroll-card" @click="handleRemindInfo(item.id)">
-							<view class="scroll-card-item">
-								<image class="scroll-card-cover" :src="getBaseUrl()+item.hospitalCover"></image>
-								<view class="scroll-card-text-area">
-									<text class="scroll-card-title">{{reservDate(item.periodDate)}}
-										{{item.periodTime}}</text>
-									<text class="scroll-card-content">{{item.hospitalName}}</text>
-									<text class="scroll-card-content">{{item.doctorName}} {{item.officeName}}</text>
-								</view>
-							</view>
+		<view class="u-p-20">
+			<view class="" >
+				<h3 class="u-m-tb-30">附近充电站</h3>
+				<view class="stand" v-for="item in list" :key="item.chargingStationId" @click.stop="handleStand(item.chargingStationId)">
+					<view class="stand-left">
+						<image :src="devUrl+item.picPath" mode=""></image>
+					</view>
+					<view class="stand-right ">
+						<view class="noWarp">
+							{{item.chargingStationName}}
 						</view>
-					</block>
-				</scroll-view>
-			</view>
-		</u-card>
-		<u-card>
-			<view slot="head">
-				<u-section title="推荐医院" :right="false"></u-section>
-			</view>
-			<view slot="body">
-				<scroll-view class="scroll-contain" scroll-x="true">
-					<block v-for="item in hospitalList" :key="item.id">
-						<view class="scroll-card" @click="handleHospitalInfo(item.id)">
-							<view class="scroll-card-item">
-								<view class="u-flex-2">
-									<image class="scroll-card-cover" :src="getBaseUrl()+item.cover"></image>
-								</view>
-								<view class="scroll-card-text-area u-flex-10">
-									<text class="scroll-card-title">{{item.name}}</text>
-									<text class="scroll-card-content">据您{{item.location}}km</text>
-								</view>
-							</view>
+						<view class="noWarp">
+							<u-icon size="25" name="../static/image/dizhi.png"></u-icon>
+							{{item.chargingStationAddr}}
 						</view>
-					</block>
-				</scroll-view>
-			</view>
-		</u-card>
-		<view class="bg-white u-m-30 u-p-20">
-			<u-section title="推荐医生" :right="false" class="u-m-b-30"></u-section>
-			<u-card :show-head="false" :show-foot="false" padding="0" margin="10rpx" v-for="(item,index) in doctorList"
-				:key="item.id" @click="toDoctor(item.id)">
-				<view slot="body" class="info-body">
-					<view class="u-flex u-row-center u-col-top">
-						<view class="u-flex-2">
-							<u-avatar :src="getBaseUrl()+item.photo"></u-avatar>
+						<view class="">
+							<u-icon size="25" name="../static/image/daohang.png"></u-icon>
+							距离我{{item.distance}}km
 						</view>
-						<view class="u-flex-10 content">
-							<view class="u-flex u-row-between">
-								<view>
-									{{item.name}} {{item.level}} {{item.officeName}}
+						<u-collapse>
+							<u-collapse-item :open="true">
+								<view class="" slot="title">
+									<view class="power">
+										<view class="">
+											<view class="u-flex">
+												<view class="power-fast">
+													快
+													<view class="" v-if="item.bsChargingPileList"> 
+														闲{{handleQuantity(item.bsChargingPileList,1)}}/{{handleQuantity(item.bsChargingPileList,2)}}
+													</view>
+												</view>
+												<view class="u-m-l-20 power-slow">
+													慢
+													<view class="" v-if="item.bsChargingPileList">
+														闲{{handleQuantity(item.bsChargingPileList,3)}}/{{handleQuantity(item.bsChargingPileList,4)}}
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
 								</view>
-								<view>
-									<u-button type="primary" shape="circle" @click.stop="handleAsk(item.id)"
-										size="mini">咨询医生
-									</u-button>
+								<view class="stand-center">
+									<view class="center-list" @click.stop="handlePile(items,items.chargingPileId,item.electricityPrice,item.serviceFee,item.chargingStationId,carId)" v-for="items in item.bsChargingPileList" :key="items.chargingPileId">
+										<view class="">
+											<view class="list-free" v-if="items.chargingPileState==3">
+												空闲
+											</view>
+											<view class="list-occupation" v-if="items.chargingPileState==2">
+												运行中
+											</view>
+											<view class="list-occupation" v-if="items.chargingPileState==5">
+												连接中
+											</view>
+											<view class="list-alarm" v-if="items.chargingPileState==1">
+												报警
+											</view>
+										</view>
+										<view class="">
+											<view class="">
+												充电桩编号：{{items.chargingPileNo}}
+											</view>
+											<view class="" v-if="items.chargingVoltage=='1'">
+												充电电压：{{220}}v
+											</view>
+											<view class="" v-if="items.chargingVoltage=='2'">
+												充电电压：{{380}}v
+											</view>
+											<view class="">
+												充电功率：{{items.chargingPileCapacity}}kw
+											</view>
+										</view>
+										<view class="">
+											<view class="list-fast" v-if="items.chargingPileRate==1">
+												快
+											</view>
+											<view class="list-slow" v-if="items.chargingPileRate==2">
+												慢
+											</view>
+										</view>
+									</view>
 								</view>
-							</view>
-							<view>{{item.hospitalLevel}} {{item.hospitalName}}</view>
-							<view v-if="item.skill" class="u-line-2 u-tips-color u-m-t-10">擅长：{{item.skill}}</view>
-							<view class="u-tips-color u-m-t-10">
-								<text>图文 ￥{{item.textAskPrice}}</text>
-								<text>电话 ￥{{item.telAskPrice}}</text>
-								<text>开药 ￥{{item.prescribePrice}}</text>
-							</view>
-						</view>
+							</u-collapse-item>
+						</u-collapse>
 					</view>
 				</view>
-			</u-card>
+			</view>
 		</view>
 		<cmt-footer></cmt-footer>
 	</view>
 </template>
 
 <script>
-	import cmtNavIcon from '@/pages/navIcon.vue'
 	import cmtFooter from '@/pages/footer.vue'
+	import ws from '@/websocket/ws.js';
+	import {devUrl} from '@/common/settings'
 	export default {
 		components: {
-			cmtNavIcon,
 			cmtFooter
 		},
 		data() {
 			return {
 				title: '',
-				current: '',
 				keyword: '',
-				//轮播广告列表
-				advList: [],
-				remindList: [],
-				hospitalList: [],
-				doctorList: [],
-				cityName:'北京市',
+				background:{
+					backgroundImage: 'linear-gradient(45deg, rgb(218,255,242), rgb(174,255,227))'
+				},
+				list:[],
+				carId:'',
+				objCarId:'',
+				objChargingPileId:'',
+				objChargingPileNo:'',
+				carIds:[],
+				devUrl:''
 			}
 		},
 		onLoad() {
-			this.getLocation();
+			this.connectws()
+			
 		},
 		onShow() {
+			
 			if (!this.isLogin) {
 				this.$u.route({
 					url: '/pages/user/login',
@@ -131,37 +142,76 @@
 				})
 				return
 			}
-			this.getLocation();
-			console.log(456);
-			this.resetPage()
-			this.getAdvList()
-			this.getRemindList()
-			this.getDoctorList()
-			this.getHospitalList()
+			this.devUrl = devUrl
+			this.getList()
+			this.carIds = uni.getStorageSync('cars').split(',')
 		},
 		computed: {
-			reservDate() {
-				return val => {
-					if (!val) {
-						return '';
-					}
-					if (typeof(val) !== 'object') {
-						val = val.replace(/-/g, '/');
-					}
-					let timestamp = new Date(val).getTime();
-					return this.$u.timeFormat(timestamp, 'yyyy年mm月dd日');
-				};
-			}
+			
 		},
 		methods: {
-			handleHospitalInfo(id) {
-				this.$u.route('/pages/hospital/index', {
-					id: id
-				})
+			connectws() {
+				ws.connect();
+				let that = this
+				ws.subscribe('/topic/order/topic/message/car/control', function(data) {
+					console.log(JSON.parse(data.body.trim()));
+					// let recData = data.body.replace(/\\/g,"");
+					// recData = recData.replace('"{','{');
+					// recData = recData.replace('}"','}');
+					let resObj = JSON.parse(data.body.trim())
+					// JSON.parse(data.body.trim()).carId
+					// JSON.parse(data.body.trim()).controlType
+					// JSON.parse(data.body.trim()).chargingPileNo
+					that.objCarId = resObj.carId
+					that.objChargingPileNo = resObj.chargingPileNo
+					
+					
+						that.list.forEach((i)=>{
+							i.bsChargingPileList.forEach((j)=>{
+								if(resObj.chargingPileNo == j.chargingPileNo){
+									i.chargingPileState = resObj.controlType
+									that.$u.vuex('ctrlType', resObj.controlType);
+									console.log(that.ctrlType);
+									that.$u.vuex('ctrlCarId', resObj.carId);
+									that.getList();
+								}
+							})
+							
+						})
+					
+					
+					// if(JSON.parse(data.body.trim()).controlType == '5'){
+					// 	that.isLink = JSON.parse(data.body.trim()).controlType
+					// 	that.isOk = false
+					// };
+				});
 				
+				ws.subscribe('order.queue.message.charging.stop', function(data) {
+					// console.log(data)
+					// let recData = data.body.replace(/\\/g,"");
+					// recData = recData.replace('"{','{');
+					// recData = recData.replace('}"','}');
+				});
 			},
-			handleCity() {
-				this.$u.route('/pages/patient/city');
+			getList(){
+				let query = {
+					customLongitude:'121.536036',
+					customLatitude:'38.886597'
+				}
+				this.$u.api.getHomeList(query).then((res)=>{
+					this.list = res.rows
+				})
+			},
+			handleQuantity(item,type){
+				if(type == '1'){
+					return item.filter(i=>i.chargingPileRate =='1'&&i.chargingPileState=='3').length
+				}else if(type == '2'){
+					return item.filter(i=>i.chargingPileRate =='1').length
+				}else if(type == '3'){
+					return item.filter(i=>i.chargingPileRate =='2'&&i.chargingPileState=='3').length
+				}else{
+					return item.filter(i=>i.chargingPileRate =='2').length
+				}
 			},
 			handleScan() {
 				uni.scanCode({
@@ -184,193 +234,178 @@
 				});
 			},
 			handleSearch(val) {
-				this.$u.route('/pages/doctor/find', {
-					keyword: val
-				})
+				
 			},
-			getLocation() {
-				this.$u.api.getLocation().then(res => {
-					console.log(res.data.location);
-					
-					this.$u.vuex('location', this.cityName);
-				})
-			},
-			resetPage() {
-				this.advList = [];
-				this.remindList = [];
-				this.hospitalList = [];
-				this.doctorList = [];
-			},
-			handleRemindInfo(id) {
-				this.$u.route('/pages/registration/detail', {
-					id,
-				})
-			},
-			getAdvList() {
-				this.$u.api.listAdv({
-					type: '2'
-				}).then(res => {
-					this.advList = res.data;
-					this.advList.forEach(item => {
-						item.image = this.getBaseUrl() + item.image;
-					})
-				})
-			},
-			getHospitalList() {
+			handlePile(item,ids,electricityPrice,serviceFee,chargingStationId,carId){
 				let query = {
-					recommend: 'Y',
-					city:this.cityName
+					chargingPileNo:item.chargingPileNo,
+					// carId:this.carId
 				}
-				this.$u.api.getHospitalList(query).then(res => {
-					this.hospitalList = res.rows;
-				})
-			},
-			getDoctorList() {
-				let query = {
-					isRecommend: 'Y',
-					city:this.cityName
+				if(item.chargingPileState == 3){
+					this.$u.route('/pages/detail/pileDetail',{ids,electricityPrice,serviceFee,chargingStationId,carId})
+				}else if(item.chargingPileState == 1){
+					this.$u.route('/pages/detail/pileDetail',{ids,electricityPrice,serviceFee,chargingStationId,carId})
+				}else{
+					if(this.carIds == -1){
+						this.$u.toast('充电桩已占用')
+					}else{
+						this.$u.api.getVerify(query).then((res)=>{
+							console.log(res.data);
+							if(this.carIds.includes(res.data+'')){
+									uni.setStorageSync('carId',res.data)
+									this.$u.route('/pages/detail/pileDetail',{ids,electricityPrice,serviceFee,chargingStationId})
+							}else{
+								console.log('无连接');
+								this.$u.toast('充电桩已占用')
+							}
+						})
+						
+					}
 				}
-				this.$u.api.listDoctor(query).then(res => {
-					this.doctorList = res.rows;
-				})
 			},
-			getRemindList() {
-				this.$u.api.getRemindList().then(res => {
-					this.remindList = res.data;
-				})
-			},
-			handleAsk(id) {
-				this.$u.route('/pages/ask/index', {
-					doctorId: id
-				})
-			},
-			toDoctor(id) {
-				this.$u.route('/pages/doctor/index', {
-					id: id
-				})
+			handleStand(id){
+				this.$u.route('/pages/detail/stand',{id})
 			}
 		}
 	}
 </script>
 
 <style scoped lang="scss">
-	.search-wrap {
-		margin: 0 20rpx;
-		flex: 1;
+	.content{
+		// background-color: #f2f9f6;
+		background:linear-gradient(rgb(231,252,244), rgb(242,249,246));
+		height: 100vh;
 	}
-	
+
 	.searchBox{
 		width: 700rpx;
 	}
-	.right-item {
-		margin: 0 12rpx;
-		position: relative;
-		color: #ffffff;
+	
+	.stand{
 		display: flex;
+		background-color: #fff;
+		margin-bottom: 10rpx;
+		border-radius: 10rpx;
+		.stand-left{
+			margin: 10rpx;
+			image{
+				width: 180rpx;
+				height: 180rpx;
+				border: 6rpx solid #ccc;
+				border-radius: 15rpx;
+			}
+		}
+		.stand-right{
+			padding: 10rpx;
+			line-height: 40rpx;
+			>view:nth-child(1) {font-weight: bolder;};
+			>view:nth-child(2) {font-size: 24rpx; margin-top: 10rpx};
+			>view:nth-child(3) {font-size: 24rpx; margin-bottom: 10rpx};
+			>view:nth-child(4) {font-weight: bolder;};
+			.power{
+				.power-fast{
+					width: 160rpx;
+					display: flex;
+					border-radius: 8rpx;
+					background:linear-gradient(to right, rgb(255,211,190) , rgb(255,253,252));
+					color: #f78757;
+					padding: 10rpx;
+					view{
+						position: relative;
+						left: 12rpx;
+						background-color: #fff;
+						padding: 4rpx;
+						font-size: 24rpx;
+						border-radius: 5rpx;
+						color: #333;
+						margin-left: 10rpx;
+					}
+				}
+				.power-slow{
+					display: flex;
+					width: 160rpx;
+					border-radius: 8rpx;
+					background:linear-gradient(to right, rgb(171,255,226) , rgb(255,253,252));
+					color: #f78757;
+					padding: 10rpx;
+					view{
+						position: relative;
+						left: 12rpx;
+						background-color: #fff;
+						padding: 4rpx;
+						font-size: 24rpx;
+						border-radius: 5rpx;
+						color: #333;
+						margin-left: 10rpx;
+					}
+				}
+			}
+			
+		}
 	}
-
-	.navbar-right {
-		margin-right: 24rpx;
-		display: flex;
+	.stand-center{
+		padding: 20rpx;
+		background-color: #fff;
+		border-radius: 10rpx;
+		.center-list{
+			background-color: #fff;
+			border-bottom: 1rpx solid #eee;
+			display: flex;
+			justify-content: space-around;
+			padding: 20rpx 0rpx 20rpx 0rpx;
+			margin-bottom: 20rpx;
+			.list-free{
+				width: 100rpx;
+				height: 100rpx;
+				border-radius: 50%;
+				border: 4rpx solid #19c490;
+				text-align: center;
+				line-height: 90rpx;
+				font-weight: normal;
+				color: #19c490;
+			}
+			.list-occupation{
+				width: 100rpx;
+				height: 100rpx;
+				border-radius: 50%;
+				border: 4rpx solid #f67943;
+				text-align: center;
+				line-height: 90rpx;
+				font-weight: normal;
+				color: #f67943;
+			}
+			.list-alarm{
+				width: 100rpx;
+				height: 100rpx;
+				border-radius: 50%;
+				border: 4rpx solid #ed2d2d;
+				text-align: center;
+				line-height: 90rpx;
+				font-weight: normal;
+				color: #ed2d2d;
+			}
+			.list-fast{font-weight: bolder;color: #fff;background-color: #f60;height: 50rpx;width: 50rpx;text-align: center;line-height: 50rpx;border-radius: 10rpx;}
+			.list-slow{font-weight: bolder;color: #fff;background-color: #15c38e;height: 50rpx;width: 50rpx;text-align: center;line-height: 50rpx;border-radius: 10rpx;}
+		}
 	}
-
-	.u-card-wrap {
-		background-color: $u-bg-color;
-		padding: 1px;
+	
+	.u-collapse{
+		width: calc(100vw - 140px);
+		padding-right: 20rpx;
 	}
-
-	.u-body-item {
-		font-size: 32rpx;
-		color: #333;
-		padding: 20rpx 10rpx;
+	/deep/ .u-collapse-body{
+		margin-left: -220rpx;
 	}
-
-	.u-body-item-title {
-		word-wrap: normal;
-		text-overflow: ellipsis;
+	/deep/ .u-collapse-head{
+		padding: 0;
 	}
-
-	.u-body-item-subtitle {
-		font-size: 25rpx;
-		color: #959595;
-		padding: 20rpx 10rpx;
-	}
-
-	.u-body-item image {
-		width: 120rpx;
-		flex: 0 0 120rpx;
-		height: 120rpx;
-		border-radius: 8rpx;
-		margin-left: 12rpx;
-	}
-
-	.scroll-contain {
-		width: 100%;
-		height: 200rpx;
+	.noWarp{
+		width: 400rpx;
 		white-space: nowrap;
-	}
-
-	.scroll-card {
-		/*控制横向排列*/
-		display: inline-block;
-		border-radius: 20rpx;
-		width: 450rpx;
-		height: 180rpx;
-		margin-left: 20rpx;
-		border: 1px solid #ccc;
-	}
-
-	.scroll-card-item {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		height: 180rpx;
-		// border-radius: 15rpx;
-	}
-
-	.scroll-card-cover {
-		height: 130rpx;
-		width: 130rpx;
-		margin:0 10rpx 0 10rpx;
-		border-radius: 5px;
-	}
-
-	.scroll-card-text-area {
-		margin-left: 10rpx;
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-	}
-
-	.scroll-card-title {
-		white-space: normal;
+		overflow: hidden;
 		text-overflow: ellipsis;
-		font-size: 30rpx;
 	}
-
-	.scroll-card-content {
-		color: #959595;
-		font-size: 23rpx;
-	}
-
-	.info-body {
-		border: 1px solid #ccc;
-		padding: 10px;
-		border-radius: 10px;
-		
-		.cover {
-			width: 100rpx;
-			height: 100rpx;
-		}
-
-		.title {
-			font-size: 30rpx;
-			font-weight: bold;
-		}
-
-		.content {
-			font-size: 28rpx;
-		}
+	/deep/.u-navbar-inner{
+		background-color: #e7fcf4;
 	}
 </style>

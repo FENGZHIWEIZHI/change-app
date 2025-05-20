@@ -5,7 +5,7 @@
 				<text class="u-m-r-20">{{comment.nickName}}</text>
 				<u-rate size="40" :disabled="true" v-model="comment.score":active-color="activeColor" @change.stop></u-rate>
 			</view>
-			<text class="u-tips-color">{{comment.commentTime}}</text>
+			<text class="u-tips-color">{{$u.timeFormat(comment.commentTime, 'yyyy年mm月dd日')}}</text>
 			
 		</view>
 		<view class="u-p-t-20 u-p-b-20">
@@ -23,9 +23,13 @@
 		data() {
 			return {
 				activeColor: "#ff9900",
-
+				
 			};
+		},
+		onLoad() {
+			this.time = this.$u.timeFormat(this.comment.commentTime, 'yyyy-mm-dd');
 		}
+		
 	}
 </script>
 

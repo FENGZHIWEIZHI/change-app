@@ -1,7 +1,7 @@
 # smart-hospital-app
 
 #### 介绍
-云上门诊app
+智能充电商用版app
 
 #### 软件架构
 软件架构说明

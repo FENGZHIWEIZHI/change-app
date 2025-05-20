@@ -2,8 +2,8 @@
 	<view>
 		<u-navbar :is-back="true" title=""></u-navbar>
 		<view class="wrap">
-			<view class="type">注册账号</view>
-			<view class="tips">欢迎使用云上门诊App</view>
+			<view class="type">注册</view>
+			<view class="tips">欢迎使用智能充电商用版</view>
 			<view class="form">
 				<u-form :model="form" :rules="rules" ref="uform" :errorType="errorType" label-position="top">
 					<u-form-item label="手机号码" prop="username" :border-bottom="false">
@@ -30,8 +30,8 @@
 			<view class="u-margin-top-40">
 				<u-button :disabled="disabled" type="primary" @click="register()">立即注册</u-button>
 			</view>
-			<view class="u-flex u-row-center link u-margin-top-40">
-				<text @click="toLogin()">已有账号去登录</text>
+			<view class="u-flex u-row-right link u-margin-top-40">
+				<text @click="toLogin()">已有账号？立即登录</text>
 			</view>
 		</view>
 		<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
@@ -112,7 +112,7 @@
 					setTimeout(() => {
 						uni.hideLoading();
 						this.$u.api.getCode(this.form.username).then(res => {
-							this.form.code = res.valid_code;
+							this.form.code = res.verifyCode;
 							// 这里此提示会被this.start()方法中的提示覆盖
 							this.$u.toast('验证码已发送');
 							// 通知验证码组件内部开始倒计时

@@ -32,14 +32,7 @@
 				"navigationBarTextStyle": "black"
 			}
 
-		}, {
-			"path": "pages/navIcon",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
+		},  {
 			"path": "pages/index",
 			"style": {
 				"navigationStyle": "custom",
@@ -81,28 +74,7 @@
 				"navigationBarTextStyle": "black"
 			}
 
-		}, {
-			"path": "pages/cms/detail",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/cms/reply",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/my/profile",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
+		},  {
 			"path": "pages/user/findPwd",
 			"style": {
 				"navigationStyle": "custom",
@@ -138,252 +110,37 @@
 				"navigationBarTextStyle": "black"
 			}
 
-		}, {
-			"path": "pages/ask/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/registration/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/hospital/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/hospital/detail",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/doctor/search",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/doctor/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/doctor/result",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/hospital/office",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/apply",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/patient/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/patient/add",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/patient/city",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/doctor/find",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/doctor/detail",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/medicine",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/item",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/ask/add",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/registration/add",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/registration/payResult",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/ask/confirm",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, 
-		{
-			"path" : "pages/ask/detail",
-			"style" :                                                                                    
-			{
-			   "navigationStyle": "custom",
-			   "navigationBarTextStyle": "black"
-			}
-		}
-		,{
-			"path" : "pages/ask/pay",
-			"style" :                                                                                    
-			{
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
 		},
-		
 		{
-			"path": "pages/ask/payResult",
+			"path": "pages/detail/pile",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "black"
 			}
-
-		}, {
-			"path": "pages/registration/detail",
+		
+		},
+		{
+			"path": "pages/detail/pileDetail",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "black"
 			}
-
-		}, {
+		
+		},
+		{
+			"path": "pages/detail/stand",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+		
+		},
+		 
+		
+		
+		
+		  {
 			"path": "pages/my/ask",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/my/registration",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/registration/pay",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/registration/rule",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}
-
-		, {
-			"path": "pages/prescribe/pay",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/finish",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/detail",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/my/prescribe",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/my/diagnosis",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/prescribe/diagnosis",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTextStyle": "black"
@@ -399,15 +156,7 @@
             }
             
         }
-		,{
-		    "path" : "pages/doctor/comment",
-		    "style" :                                                                                    
-		    {
-		        "navigationStyle": "custom",
-		        "navigationBarTextStyle": "black"
-		    }
-		    
-		}
+		
         ,{
             "path" : "pages/setIp",
             "style" :                                                                                    

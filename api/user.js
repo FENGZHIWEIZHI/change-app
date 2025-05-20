@@ -1,6 +1,6 @@
 // 获取用户详细信息
 function getUserInfo() {
-	return uni.$u.get('/user/getInfo');
+	return uni.$u.get('/getInfo');
 }
 
 // 修改用户信息
@@ -15,12 +15,12 @@ function resetPwd(data) {
 
 // 检查用户，重置密码
 function checkUser(data) {
-	return uni.$u.post('/user/check', data);
+	return uni.$u.get('/api/verification', data);
 }
 
 // 设置密码
 function setPwd(data) {
-	return uni.$u.put('/user/setPwd', data);
+	return uni.$u.post('/api/forgetPassword', data);
 }
 
 // 设置密码

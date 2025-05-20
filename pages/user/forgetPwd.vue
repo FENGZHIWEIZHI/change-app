@@ -3,8 +3,8 @@
 		<u-navbar :is-back="true" title="忘记密码"></u-navbar>
 		<view class="u-margin-top-20">
 			<u-form :model="form" :rules="rules" ref="uform" :errorType="errorType" label-position="top">
-				<u-form-item label="手机号码" prop="username" :border-bottom="false">
-					<u-input v-model="form.username" :border="true" placeholder="请输入手机号码" maxlength="11" />
+				<u-form-item label="手机号码" prop="phonenumber" :border-bottom="false">
+					<u-input v-model="form.phonenumber" :border="true" placeholder="请输入手机号码" maxlength="11" />
 				</u-form-item>
 				<u-form-item label="验证码" prop="code" :border-bottom="false">
 					<u-input v-model="form.code" :border="true" placeholder="请输入验证码" type="number" maxlength="6">
@@ -30,11 +30,11 @@
 				codeTips: '',
 				code: '',
 				form: {
-					username: '',
+					phonenumber: '',
 					code: '',
 				},
 				rules: {
-					username: [{
+					phonenumber: [{
 							required: true,
 							message: '请输入手机号',
 							trigger: ['change', 'blur'],
@@ -83,11 +83,11 @@
 		},
 		methods: {
 			getCode() {
-				if (!this.form.username) {
+				if (!this.form.phonenumber) {
 					this.$u.toast("请输入手机号");
 					return;
 				}
-				if (!this.$u.test.mobile(this.form.username)) {
+				if (!this.$u.test.mobile(this.form.phonenumber)) {
 					this.$u.toast("手机号码不正确");
 					return;
 				}
@@ -99,8 +99,8 @@
 					})
 					setTimeout(() => {
 						uni.hideLoading();
-						this.$u.api.getCode(this.form.username).then(res => {
-							this.form.code = res.valid_code;
+						this.$u.api.getCode(this.form.phonenumber).then(res => {
+							this.form.code = res.verifyCode;
 							// 这里此提示会被this.start()方法中的提示覆盖
 							this.$u.toast('验证码已发送');
 							// 通知验证码组件内部开始倒计时
@@ -120,20 +120,19 @@
 					if (valid) {
 						console.log('验证通过');
 						console.log(this.form)
+						// this.$u.toast("验证通过")
+						// setTimeout(() => {
+						// 	this.$u.route('/pages/user/findPwd');
+						// }, 2000);
 						this.$u.api.checkUser(this.form).then(res => {
-							if (res.isPass) {
+							if (res.code == '200') {
 								this.$refs.uToast.show({
 									title: '验证通过',
 									url: '/pages/user/findPwd',
 									params: {
-										username: this.form.username
+										phonenumber: this.form.phonenumber
 									}
 								})
-
-								/* this.$u.toast("验证通过")
-								setTimeout(() => {
-									this.$u.route('/pages/user/resetPwd');
-								}, 2000); */
 							}
 
 						});
@@ -154,6 +153,4 @@
 	.form {
 		margin-top: 80rpx;
 	}
-</style>
-
 </style>

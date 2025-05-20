@@ -11,9 +11,9 @@
 			</swiper-item>
 		</swiper>
 		<view v-show="guideBtn" class="jump-over u-p-r-10">
-			<navigator url="setIp">
+			<!-- <navigator url="setIp">
 				<view class="ip-btn">IP端口设置</view>
-			</navigator>
+			</navigator> -->
 		</view>
 		<view v-show="guideBtn" class="experience" @tap="toExp()">立即体验</view>
 	</view>
@@ -27,7 +27,7 @@
 				duration: 500,
 				guideBtn: false,
 				advList: [{
-						image: '/static/image/guide/guide1.png'
+						image: '/static/image/guide/guide2.jpg'
 					},
 				],
 			}
@@ -71,11 +71,14 @@
 						url: '/pages/home'
 					});
 				} else {
-					uni.showToast({
-						title: '请先设置IP端口！',
-						icon: 'none',
-						duration: 1000
-					})
+					// uni.showToast({
+					// 	title: '请先设置IP端口！',
+					// 	icon: 'none',
+					// 	duration: 1000
+					// })
+					uni.switchTab({
+						url: '/pages/home'
+					});
 				}
 			}
 		}

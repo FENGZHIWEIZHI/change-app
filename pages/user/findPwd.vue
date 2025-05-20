@@ -29,7 +29,7 @@
 				errorType: ['toast'],
 				pwdType: "password",
 				form: {
-					username: '',
+					phonenumber: '',
 					password: '',
 					rePassword: ''
 				},
@@ -62,7 +62,7 @@
 			}
 		},
 		onLoad(option) {
-			this.form.username = option.username
+			this.form.phonenumber = option.phonenumber
 		},
 		onReady() {
 			this.$refs.uform.setRules(this.rules);

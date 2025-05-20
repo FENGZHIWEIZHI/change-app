@@ -1,10 +1,10 @@
 <template>
 	<view class="u-padding-20">
 		<view class="logo u-flex u-row-center">
-			<image src="/static/image/cmt.jpg"></image>
+			<image src="/static/logo.jpg"></image>
 		</view>
 		<view class="type">账号密码登录</view>
-		<view class="tips">欢迎使用云上门诊App</view>
+		<view class="tips">欢迎使用智能充电商用版</view>
 		<view class="form">
 			<u-form :model="form" :rules="rules" ref="uform" :errorType="errorType" label-position="top">
 				<u-form-item label="手机号码" prop="username" :border-bottom="false">

@@ -37,20 +37,20 @@
 		methods: {
 			
 			handleIP(){
-				this.$u.route('/pages/setIp')
+				// this.$u.route('/pages/setIp')
 			},
 
 			handleChangeTel() {
-				this.$u.route('/pages/my/changeTel')
+				// this.$u.route('/pages/my/changeTel')
 			},
 
 			handleResetPwd() {
-				this.$u.route('/pages/my/resetPwd')
+				// this.$u.route('/pages/my/resetPwd')
 			},
 
 			handleClearCache() {
-				this.$u.toast("清除成功");
-				this.cacheValue = "0M";
+				// this.$u.toast("清除成功");
+				// this.cacheValue = "0M";
 			},
 
 			confirm() {
@@ -58,6 +58,10 @@
 					this.$u.vuex('token', '');
 					this.$u.vuex('isLogin', false);
 					this.$u.vuex('userInfo', null);
+					uni.setStorageSync('cars',{})
+					uni.setStorageSync('roles',{})
+					uni.setStorageSync('userId',{})
+					uni.setStorageSync('user',{})
 					this.show = false;
 					this.$u.route('/pages/user/login')
 				})
